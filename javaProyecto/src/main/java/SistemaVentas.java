@@ -87,14 +87,18 @@ class Cliente {
 
 /** Representa una venta en el sistema de gestión de ventas. */
 class Venta {
+    private final int id;
+    private final Cliente cliente;
     private final List<Producto> productos;
     private double total;
 
-    /** Crea una nueva Venta con el cliente especificado.
+    /** Crea una nueva Venta con el ID y cliente especificados.
      * @param id El ID de la venta.
      * @param cliente El cliente asociado a la venta.
      */
     public Venta(int id, Cliente cliente) {
+        this.id = id;
+        this.cliente = cliente;
         this.productos = new ArrayList<>();
         this.total = 0.0;
     }
@@ -107,14 +111,26 @@ class Venta {
         total += producto.getPrecio();
     }
 
+    /** Obtiene el ID de la venta.
+     * @return El ID de la venta.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /** Obtiene el cliente asociado a la venta.
+     * @return El cliente asociado a la venta.
+     */
+    public Cliente getCliente() {
+        return cliente;
+    }
+
     /** Obtiene el total de la venta.
      * @return El total de la venta.
      */
     public double getTotal() {
         return total;
     }
-
-    // Otros métodos relacionados con la venta
 }
 
 /** Clase principal de la aplicación de gestión de ventas. */
@@ -138,14 +154,18 @@ public class SistemaVentas {
      * @param cliente El cliente a agregar.
      */
     public void agregarCliente(Cliente cliente) {
-        clientes.add(cliente);
+        if (cliente != null) {
+            clientes.add(cliente);
+        }
     }
 
     /** Agrega un producto al inventario del sistema.
      * @param producto El producto a agregar.
      */
     public void agregarProducto(Producto producto) {
-        inventario.add(producto);
+        if (producto != null) {
+            inventario.add(producto);
+        }
     }
 
     /** Realiza una venta con el cliente y los productos especificados.
